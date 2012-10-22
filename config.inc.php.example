@@ -1,0 +1,9 @@
+<?php
+$openerp_server = 'https://192.168.56.101/xmlrpc';
+$username = 'admin';
+$pwd = 'admin1';
+$dbname = 'openerp-idu';
+
+ini_set('include_path',dirname(__FILE__).'/externals/zend/library');
+require_once 'Zend/Loader/Autoloader.php';
+Zend_Loader_Autoloader::getInstance();
