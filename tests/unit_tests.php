@@ -3,7 +3,7 @@ require dirname(__FILE__).'/../externals/testmore-php/testmore.php';
 require(dirname(__FILE__).'/../config.inc.php');
 
 plan('no_plan');
-require_ok('../src/OpenErpOcs.php');
+require_ok(dirname(__FILE__).'/../src/OpenErpOcs.php');
 
 
 $time = time();
