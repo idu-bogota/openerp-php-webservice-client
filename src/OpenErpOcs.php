@@ -76,7 +76,35 @@ class OpenErpPqr extends OpenErpObject {
     public function fetchOneByDmsId($value){
         return $this->fetchOne(array(array('external_dms_id','=',$value)));
     }
+
+    /**
+     *  Return a geojson featrue structure as array or in geojson format.
+     *  Return null if PQR has not a geo_point
+     */
+    public function getGeoJsonFeature($as_array = false) {
+        // { "type": "Feature",
+        //   "geometry": {"type": "Point", "coordinates": [102.0, 0.5]},
+        //   "properties": {"prop0": "value0"}
+        // }
+        if(empty($this->attributes['geo_point'])) return null;
+
+        $feature = array(
+            'type' => 'Feature',
+            'geometry' => json_decode($this->attributes['geo_point']),
+            'properties' => array(
+                'category' => $this->attributes['categ_id'][1],
+                'classification' => $this->attributes['sub_classification_id'][1],
+                'description' => $this->attributes['description'],
+                'subject' => $this->attributes['name'],
+            )
+        );
+        if($as_array) {
+            return $feature;
+        }
+        return json_encode($feature);
+    }
 }
+
 class OpenErpOcsCategory extends OpenErpObject {
     protected function getClassName() {
         return 'crm.case.categ';
