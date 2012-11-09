@@ -171,4 +171,29 @@ abstract class OpenErpObject {
         }
         return $obj;
     }
+
+    public function getAttributesMetadataDesc()
+    {
+        $str = '';
+        $atts = $this->getAttributesMetadata();
+        $classname = $this->getClassName();
+        //Objeto, Método, Parámetro, obligatorio, Referencia clase, referencia key
+        foreach($atts as $k => $a) {
+            $ref_key = '-';
+            if ($a['references']){
+                $ref_key = 'name';
+                if(isset($a['references']['search_key'])) {
+                    $ref_key = $a['references']['search_key'];
+                }
+            }
+            $str .= sprintf('"%s","create/update","%s",%s,"%s","%s"'."\n",
+                $classname,
+                $k,
+                $a['compulsory'],
+                ($a['references'])?$a['references']['classname']:'-',
+                $ref_key
+            );
+        }
+        return $str;
+    }
 }
