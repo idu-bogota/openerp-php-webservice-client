@@ -87,17 +87,19 @@ class OpenErpPqr extends OpenErpObject {
         //   "properties": {"prop0": "value0"}
         // }
         if(empty($this->attributes['geo_point'])) return null;
-
+        $map = array('description','name','state','resolution','create_date','date_closed');
         $feature = array(
             'type' => 'Feature',
             'geometry' => json_decode($this->attributes['geo_point']),
             'properties' => array(
+                'claim_id' => $this->id,
                 'category' => $this->attributes['categ_id'][1],
                 'classification' => $this->attributes['sub_classification_id'][1],
-                'description' => $this->attributes['description'],
-                'subject' => $this->attributes['name'],
             )
         );
+        foreach($map as $field) {
+            $feature['properties'][$field] = $this->attributes[$field];
+        }
         if($as_array) {
             return $feature;
         }
