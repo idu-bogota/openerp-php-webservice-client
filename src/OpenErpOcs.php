@@ -28,7 +28,7 @@ class OpenErpPartnerAddress extends OpenErpObject {
         return array(
             'name' => array('compulsory' => 1, 'references' => FALSE),
             'document_type' => array('compulsory' => 1, 'references' => FALSE),
-            'document_id' => array('compulsory' => 1, 'references' => FALSE),
+            'document_number' => array('compulsory' => 1, 'references' => FALSE),
             'name' => array('compulsory' => 1, 'references' => FALSE),
             'last_name' => array('compulsory' => 1, 'references' => FALSE),
             'gender' => array('compulsory' => 0, 'references' => FALSE),
