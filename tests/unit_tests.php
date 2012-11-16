@@ -12,7 +12,6 @@ diag("time = $time");
 diag("username = $username");
 diag("db = $dbname");
 
-
 $c = new OpenErpWebServiceClient($openerp_server, $username, $pwd, $dbname);
 
 //***********************************************************
@@ -130,6 +129,18 @@ catch(Exception $e) {
     fail('PQR no created due: '. $e->getMessage());
     diag($e->getTraceAsString());
 }
+
+$pqr_list = new OpenErpPqr($c);
+$results = $pqr_list->fetch();
+ok(count($results) >= 2, 'Listing no limiting is OK');
+
+$results = $pqr_list->fetch(array(),0,1);
+ok(count($results) == 1, 'Listing limiting to one is OK');
+
+
+// $client = new Zend_XmlRpc_Client($openerp_server.'/object');
+// $results = $client->call('execute', array($dbname, 1, 'admin1', 'crm.claim', 'search', array(),0,2));
+// var_export($results);
 
 // $client = new Zend_XmlRpc_Client($openerp_server.'/object');
 // $data = array(

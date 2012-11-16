@@ -20,7 +20,7 @@ class OpenErpWebServiceClient {
         return $this->user_id;
     }
 
-    public function execute($model, $operation, $parameters) {
+    public function execute($model, $operation, $parameters, $parameters_2 = array(), $limit = null) {
         if(empty($this->user_id)){
             $this->login();
         }
@@ -29,7 +29,19 @@ class OpenErpWebServiceClient {
         }
         $auth = array($this->dbname, $this->user_id, $this->pwd);
         $extra = array($model, $operation, $parameters);
-        return $this->client->call('execute', array_merge($auth,$extra));
+        $full_parameters = array_merge($auth,$extra);
+        if($limit !== null && $operation == 'search') {
+            $offset = 0;
+            if(is_numeric($parameters_2)) {
+                $offset = $parameters_2;
+            }
+            $full_parameters[] = $offset;
+            $full_parameters[] = $limit;
+        }
+        elseif(is_array($parameters_2) && !empty($parameters_2) && $operation = 'read') {
+            $full_parameters[] = $parameters_2;
+        }
+        return $this->client->call('execute', $full_parameters);
     }
 }
 
@@ -53,14 +65,14 @@ abstract class OpenErpObject {
     public function update() {
     }
 
-    public function fetch($args = array()) {
-        $ids = $this->client->execute($this->getClassName(), 'search', $args);
+    public function fetch($args = array(), $offset = 0, $limit = null) {
+        $ids = $this->client->execute($this->getClassName(), 'search', $args, $offset, $limit);
         //var_export($ids);
         return $this->load($ids);
     }
 
     public function fetchOne($args = array()) {
-        $ids = $this->client->execute($this->getClassName(), 'search', $args);
+        $ids = $this->client->execute($this->getClassName(), 'search', $args, 0, 1);
         return $this->loadOne($ids);
     }
 
