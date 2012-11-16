@@ -63,7 +63,7 @@ $pqr->attributes = array(
     'description' => 'This is a PQR '.$time,
     'state' => 'pending',
     'priority' => 'h',
-    'csp_id' => array('name' => 'my pcs '.$time),
+    'csp_id' => 1,
     'channel' => array('name' => 'direct'),
     'external_dms_id' => $time
 );
@@ -109,7 +109,7 @@ $pqr->attributes = array(
     'priority' => 'h',
     'classification_id' => array('name' => 'test '.$time),
     'sub_classification_id' => array('name' => 'sub test '.$time),
-    'csp_id' => array('name' => 'my pcs '.$time),
+    'csp_id' => 1,
     'description' => 'This is a PQR '.$time,
     'state' => 'pending',
     'channel' => array('name' => 'direct'),
