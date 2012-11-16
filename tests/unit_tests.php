@@ -91,6 +91,12 @@ is($pqr_found->attributes['state'],'pending','state is OK' );
 //var_export($pqr_found->attributes);
 
 //***********************************************************
+//Bogota -8250479.1376255,530328.03300816 | -8245663.6048442,509842.90943058
+
+$lon = '-' . rand(8250479,8245663) .'.'. rand(0,99999999);
+$lat = rand(509842,530328) .'.'. rand(0,99999999);
+$geojson = sprintf('{"type":"Point","coordinates":[%s,%s]}',$lon, $lat);
+diag($geojson);
 $pqr = new OpenErpPqr($c);
 $pqr->attributes = array(
     'partner_address_id' =>  array(
@@ -105,6 +111,7 @@ $pqr->attributes = array(
         'name' => 'my organisation '.$time,
         'ref' => 'nit_'.$time,
     ),
+    'geo_point' => $geojson,
     'categ_id' => array('name' => 'Valor reclamaciones'),
     'priority' => 'h',
     'classification_id' => array('name' => 'test '.$time),
