@@ -67,7 +67,11 @@ class OpenErpPqr extends OpenErpObject {
             'channel' => array('compulsory' => 1, 'references' => array('classname' => 'OpenErpOcsChannel')),
             'external_dms_id' => array('compulsory' => 1, 'references' => FALSE),
             'priority' => array('compulsory' => 1, 'references' => FALSE),
-            'geo_point' => array('compulsory' => 0, 'references' => FALSE)
+            'geo_point' => array('compulsory' => 0, 'references' => FALSE),
+            'name' => array('compulsory' => 0, 'references' => FALSE),
+            'resolution' => array('compulsory' => 0, 'references' => FALSE),
+            'create_date' => array('compulsory' => 0, 'references' => FALSE),
+            'date_closed' => array('compulsory' => 0, 'references' => FALSE),
         );
     }
 
