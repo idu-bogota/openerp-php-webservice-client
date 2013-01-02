@@ -120,6 +120,10 @@ $pqr->attributes = array(
     'state' => 'pending',
     'channel' => array('name' => 'direct'),
     'external_dms_id' => $time,
+    'damage_type_by_citizen' => 'hundimiento',
+    'damage_width_by_citizen' => '10cm',
+    'damage_length_by_citizen' => '1m',
+    'damage_deep_by_citizen' => '1m',
 );
 try {
     $pqr_id = $pqr->create();
