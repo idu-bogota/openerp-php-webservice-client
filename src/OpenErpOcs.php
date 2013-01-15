@@ -32,7 +32,7 @@ class OpenErpPartnerAddress extends OpenErpObject {
             'name' => array('compulsory' => 1, 'references' => FALSE),
             'last_name' => array('compulsory' => 1, 'references' => FALSE),
             'gender' => array('compulsory' => 0, 'references' => FALSE),
-            'partner_id' => array('compulsory' => 0, 'references' => array('classname' => 'OpenErpPartner','search_key' => 'ref')),
+            'partner_id' => array('compulsory' => 0, 'references' => array('classname' => 'OpenErpPartner','search_key' => 'vat')),
             'function' => array('compulsory' => 0, 'references' => FALSE),
             'street' => array('compulsory' => 0, 'references' => FALSE),
             'phone' => array('compulsory' => 0, 'references' => FALSE),
