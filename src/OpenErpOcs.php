@@ -65,7 +65,7 @@ class OpenErpPqr extends OpenErpObject {
             'state' => array('compulsory' => 1, 'references' => FALSE),
             'csp_id' => array('compulsory' => 1, 'references' => array('classname' => 'OpenErpOcsAttentionPoint')),
             'channel' => array('compulsory' => 1, 'references' => array('classname' => 'OpenErpOcsChannel')),
-            'external_dms_id' => array('compulsory' => 1, 'references' => FALSE),
+            'orfeo_id' => array('compulsory' => 1, 'references' => FALSE),
             'priority' => array('compulsory' => 1, 'references' => FALSE),
             'geo_point' => array('compulsory' => 0, 'references' => FALSE),
             'name' => array('compulsory' => 0, 'references' => FALSE),
@@ -82,8 +82,8 @@ class OpenErpPqr extends OpenErpObject {
     /**
      * Find PQR by Document Management System ID and load it
      */
-    public function fetchOneByDmsId($value){
-        return $this->fetchOne(array(array('external_dms_id','=',$value)));
+    public function fetchOneByOrfeoId($value){
+        return $this->fetchOne(array(array('orfeo_id','=',$value)));
     }
 
     /**

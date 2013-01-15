@@ -64,7 +64,7 @@ $pqr->attributes = array(
     'priority' => 'h',
     'csp_id' => 1,
     'channel' => array('name' => 'direct'),
-    'external_dms_id' => $time
+    'orfeo_id' => $time
 );
 
 try {
@@ -83,7 +83,7 @@ is($pqr_load->attributes['description'],'This is a PQR '.$time,'description is O
 is($pqr_load->attributes['state'],'pending','state is OK' );
 
 $pqr_found = new OpenErpPqr($c);
-$pqr_found->fetchOneByDmsId($time);
+$pqr_found->fetchOneByOrfeoId($time);
 is($pqr_found->id,$pqr_id,'ID found is OK' );
 is($pqr_found->attributes['description'],'This is a PQR '.$time,'description is OK' );
 is($pqr_found->attributes['state'],'pending','state is OK' );
@@ -119,7 +119,7 @@ $pqr->attributes = array(
     'description' => 'This is a PQR '.$time,
     'state' => 'pending',
     'channel' => array('name' => 'direct'),
-    'external_dms_id' => $time,
+    'orfeo_id' => $time,
     'damage_type_by_citizen' => 'hundimiento',
     'damage_width_by_citizen' => '10cm',
     'damage_length_by_citizen' => '1m',
