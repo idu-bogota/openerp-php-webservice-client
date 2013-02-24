@@ -5,7 +5,6 @@ require(dirname(__FILE__).'/../config.inc.php');
 plan('no_plan');
 require_ok(dirname(__FILE__).'/../src/OpenErpOcs.php');
 
-
 $time = time();
 diag($openerp_server);
 diag("time = $time");
@@ -18,11 +17,12 @@ $c = new OpenErpWebServiceClient($openerp_server, $username, $pwd, $dbname);
 $partner_address_id = new OpenErpPartnerAddress($c);
 $partner_address_id->attributes = array(
     'name' => 'citizen '.$time,
-    'document_type' => 'C',
+    'document_type' => 'CC',
     'document_number' => $time,
     'name' => 'name '.$time,
     'last_name' => 'lastname '.$time,
     'email' => $time.'@email.com',
+    'gender' => 'm',
 );
 
 try {
@@ -100,7 +100,7 @@ $pqr = new OpenErpPqr($c);
 $pqr->attributes = array(
     'partner_address_id' =>  array(
         'name' => 'citizen '.$time,
-        'document_type' => 'C',
+        'document_type' => 'CC',
         'document_number' => $time,
         'name' => 'name '.$time,
         'last_name' => 'lastname '.$time,
