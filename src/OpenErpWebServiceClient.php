@@ -51,6 +51,9 @@ abstract class OpenErpObject {
     protected $client;
     public $id;
     public $attributes;
+    protected $create_operation_name = 'create';
+    protected $fetch_operation_name = 'search';
+    protected $load_operation_name = 'read';
 
     public function __construct($ws_client) {
         $this->client = $ws_client;
@@ -59,20 +62,20 @@ abstract class OpenErpObject {
     public function create() {
         $this->processAttributes();
         $this->checkCompulsoryAttributes();
-        return $this->id = $this->client->execute($this->getClassName(), 'create', $this->attributes);
+        return $this->id = $this->client->execute($this->getClassName(), $this->create_operation_name, $this->attributes);
     }
 
     public function update() {
     }
 
     public function fetch($args = array(), $offset = 0, $limit = null) {
-        $ids = $this->client->execute($this->getClassName(), 'search', $args, $offset, $limit);
+        $ids = $this->client->execute($this->getClassName(), $this->fetch_operation_name, $args, $offset, $limit);
         //var_export($ids);
         return $this->load($ids);
     }
 
     public function fetchOne($args = array()) {
-        $ids = $this->client->execute($this->getClassName(), 'search', $args, 0, 1);
+        $ids = $this->client->execute($this->getClassName(), $this->fetch_operation_name, $args, 0, 1);
         return $this->loadOne($ids);
     }
 
@@ -92,7 +95,7 @@ abstract class OpenErpObject {
         foreach($ids as $id){
             $obj = new $classname($this->client);
             $obj->id = $id;
-            $obj->attributes = $this->client->execute($this->getClassName(), 'read', $id, $this->getAttributesMetadata());
+            $obj->attributes = $this->client->execute($this->getClassName(), $this->load_operation_name, $id, $this->getAttributesMetadata());
             $result[] = $obj;
             if($load_one) {
                 break;
