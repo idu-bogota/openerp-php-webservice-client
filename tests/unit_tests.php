@@ -173,6 +173,20 @@ $result = $c->execute('crm.claim', 'new_from_data', $data);
 ok($result['status'] == 'success', 'Success');
 ok($result['result']['id'] > 0, 'Object Created');
 
+class myOpenErpPqr extends OpenErpPqr {
+    protected $create_operation_name = 'new_from_data';
+
+    protected function processAttributes() {
+    }
+}
+
+$new_pqr = new myOpenErpPqr($c);
+$new_pqr->attributes = $data;
+$result = $new_pqr->create();
+#var_export($result);
+ok($result['status'] == 'success', 'Success');
+ok($result['result']['id'] > 0, 'Object Created');
+
 // $client = new Zend_XmlRpc_Client($openerp_server.'/object');
 // $results = $client->call('execute', array($dbname, 1, 'admin1', 'crm.claim', 'search', array(),0,2));
 // var_export($results);
