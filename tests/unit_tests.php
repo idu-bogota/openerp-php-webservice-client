@@ -141,6 +141,37 @@ ok(count($results) >= 2, 'Listing no limiting is OK');
 $results = $pqr_list->fetch(array(),0,1);
 ok(count($results) == 1, 'Listing limiting to one is OK');
 
+$data = array (
+  'partner_address_id' =>
+  array (
+    'name' => $time,
+    'last_name' => $time,
+    'document_type' => 'CC',
+    'document_number' => $time,
+    'email' => $time.'@my.email.com',
+    'gender' => 'f',
+  ),
+  'categ_id' => 1,
+  'classification_id' => 1,
+  'sub_classification_id' => 1,
+  'csp_id' => 1,
+  'channel' => 1,
+  'orfeo_id' => '0',
+  'priority' => 'l',
+  'state' => 'pending',
+  'description' => 'testing',
+  'damage_type_by_citizen' => 'hundimiento',
+  'damage_width_by_citizen' => 'ns-nr',
+  'damage_length_by_citizen' => 'ns-nr',
+  'damage_deep_by_citizen' => 'ns-nr',
+  'geo_point' => '{"type":"Point","coordinates":[-8246435.1410983,512561.2012486]}',
+  'email_from' => $time.'@my.email.com',
+);
+
+$result = $c->execute('crm.claim', 'new_from_data', $data);
+#var_export($result);
+ok($result['status'] == 'success', 'Success');
+ok($result['result']['id'] > 0, 'Object Created');
 
 // $client = new Zend_XmlRpc_Client($openerp_server.'/object');
 // $results = $client->call('execute', array($dbname, 1, 'admin1', 'crm.claim', 'search', array(),0,2));
