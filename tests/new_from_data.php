@@ -25,9 +25,9 @@ $data = array (
   ),
   'categ_id' => 1,
   'classification_id' => 1,
-  'sub_classification_id' => 1,
+  'sub_classification_id' => 21,
   'csp_id' => 1,
-  'channel' => 1,
+  'channel' => 5,
   'orfeo_id' => '0',
   'priority' => 'l',
   'state' => 'pending',
@@ -41,7 +41,7 @@ $data = array (
 );
 
 $result = $c->execute('crm.claim', 'new_from_data', $data);
-#var_export($result);
+//var_export($result);
 ok($result['status'] == 'success', 'Success');
 ok($result['result']['id'] > 0, 'Object Created');
 
@@ -55,7 +55,7 @@ class myOpenErpPqr extends OpenErpPqr {
 $new_pqr = new myOpenErpPqr($c);
 $new_pqr->attributes = $data;
 $result = $new_pqr->create();
-#var_export($result);
+// var_export($result);
 ok($result['status'] == 'success', 'Success');
 ok($result['result']['id'] > 0, 'Object Created');
 
@@ -72,7 +72,7 @@ $data = array (
   'categ_id' => 'queja',
   'sub_classification_id' => 'Malla Vial Arterial',
   'csp_id' => 1,
-  'channel' => 'website',
+  'channel' => 'chat',
   'orfeo_id' => '0',
   'priority' => 'l',
   'state' => 'pending',
@@ -82,6 +82,6 @@ $data = array (
 
 $new_pqr->attributes = $data;
 $result = $new_pqr->create();
-#var_export($result);
+//var_export($result);
 ok($result['status'] == 'success', 'Success');
 ok($result['result']['id'] > 0, 'Object Created');
