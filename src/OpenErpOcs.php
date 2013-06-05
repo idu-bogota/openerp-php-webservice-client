@@ -59,7 +59,7 @@ class OpenErpPqr extends OpenErpObject {
             'partner_id' => array('compulsory' => 0, 'references' => array('classname' => 'OpenErpPartner','search_key' => 'ref')),
             'partner_address_id' => array('compulsory' => 0, 'references' => array('classname' => 'OpenErpPartnerAddress','search_key' => 'document_number')),
             'categ_id' => array('compulsory' => 1, 'references' => array('classname' => 'OpenErpOcsCategory')),
-            'classification_id' => array('compulsory' => 1, 'references' => array('classname' => 'OpenErpOcsClassification')),
+            'classification_id' => array('compulsory' => 0, 'references' => array('classname' => 'OpenErpOcsClassification')),
             'sub_classification_id' => array('compulsory' => 1, 'references' => array('classname' => 'OpenErpOcsClassification')),
             'description' => array('compulsory' => 1, 'references' => FALSE),
             'state' => array('compulsory' => 1, 'references' => FALSE),
