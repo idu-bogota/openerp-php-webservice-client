@@ -85,3 +85,25 @@ $result = $new_pqr->create();
 //var_export($result);
 ok($result['status'] == 'success', 'Success');
 ok($result['result']['id'] > 0, 'Object Created');
+
+$data = array (
+  'categ_id' => 'queja',
+  'sub_classification_id' => 'Malla Vial Arterial',
+  'csp_id' => 1,
+  'channel' => 'chat',
+  'orfeo_id' => '0',
+  'priority' => 'l',
+  'state' => 'pending',
+  'description' => 'testing with names instead of IDs',
+  'email_from' => $time.'@my.email.com',
+);
+
+$new_pqr->attributes = $data;
+$result = $new_pqr->create();
+//var_export($result);
+ok($result['status'] == 'success', 'Success');
+ok($result['result']['id'] > 0, 'Object Created');
+
+$pqr_load = new myOpenErpPqr($c);
+$pqr_load->loadOne($result['result']['id']);
+ok(!empty($pqr_load->attributes), 'Data retrieved');
