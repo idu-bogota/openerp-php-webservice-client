@@ -80,7 +80,7 @@ abstract class OpenErpObject {
     }
 
     public function loadOne($id) {
-        return $this->load($id, TRUE);
+        return $this->load((int)$id, TRUE);
     }
 
     public function load($ids, $load_one = FALSE) {
