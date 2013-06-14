@@ -76,6 +76,8 @@ class OpenErpPqr extends OpenErpObject {
             'damage_width_by_citizen' => array('compulsory' => 0, 'references' => FALSE),
             'damage_length_by_citizen' => array('compulsory' => 0, 'references' => FALSE),
             'damage_deep_by_citizen' => array('compulsory' => 0, 'references' => FALSE),
+            'attachment' => array('compulsory' => 0, 'references' => FALSE),
+            'attachment_name' => array('compulsory' => 0, 'references' => FALSE),
         );
     }
 

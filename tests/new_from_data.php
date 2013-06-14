@@ -11,6 +11,13 @@ diag("time = $time");
 diag("username = $username");
 diag("db = $dbname");
 
+class myOpenErpPqr extends OpenErpPqr {
+    protected $create_operation_name = 'new_from_data';
+
+    protected function processAttributes() {
+    }
+}
+
 $c = new OpenErpWebServiceClient($openerp_server, $username, $pwd, $dbname);
 
 $data = array (
@@ -44,13 +51,6 @@ $result = $c->execute('crm.claim', 'new_from_data', $data);
 //var_export($result);
 ok($result['status'] == 'success', 'Success');
 ok($result['result']['id'] > 0, 'Object Created');
-
-class myOpenErpPqr extends OpenErpPqr {
-    protected $create_operation_name = 'new_from_data';
-
-    protected function processAttributes() {
-    }
-}
 
 $new_pqr = new myOpenErpPqr($c);
 $new_pqr->attributes = $data;
@@ -107,3 +107,25 @@ ok($result['result']['id'] > 0, 'Object Created');
 $pqr_load = new myOpenErpPqr($c);
 $pqr_load->loadOne($result['result']['id']);
 ok(!empty($pqr_load->attributes), 'Data retrieved');
+
+//Attach a file
+$file_encode64 = base64_encode(file_get_contents(__FILE__));
+$data = array (
+  'categ_id' => 'queja',
+  'sub_classification_id' => 'Malla Vial Arterial',
+  'csp_id' => 1,
+  'channel' => 'chat',
+  'orfeo_id' => '0',
+  'priority' => 'l',
+  'state' => 'pending',
+  'description' => 'testing with attachment',
+  'attachment' => $file_encode64,
+  'attachment_name' => "$time.txt",
+);
+
+$new_pqr = new myOpenErpPqr($c);
+$new_pqr->attributes = $data;
+$result = $new_pqr->create();
+//var_export($result);
+ok($result['status'] == 'success', 'Success');
+ok($result['result']['id'] > 0, 'Object Created');
