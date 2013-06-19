@@ -12,7 +12,7 @@ class OpenErpPartner extends OpenErpObject {
     protected function getAttributesMetadata() {
         return array (
             'name' => array('compulsory' => 1, 'references' => FALSE),
-            'ref' => array('compulsory' => 1, 'references' => FALSE),
+            'vat' => array('compulsory' => 1, 'references' => FALSE),
         );
     }
 
@@ -56,7 +56,7 @@ class OpenErpPqr extends OpenErpObject {
 
     protected function getAttributesMetadata() {
         return array(
-            'partner_id' => array('compulsory' => 0, 'references' => array('classname' => 'OpenErpPartner','search_key' => 'ref')),
+            'partner_id' => array('compulsory' => 0, 'references' => array('classname' => 'OpenErpPartner','search_key' => 'vat')),
             'partner_address_id' => array('compulsory' => 0, 'references' => array('classname' => 'OpenErpPartnerAddress','search_key' => 'document_number')),
             'categ_id' => array('compulsory' => 1, 'references' => array('classname' => 'OpenErpOcsCategory')),
             'classification_id' => array('compulsory' => 0, 'references' => array('classname' => 'OpenErpOcsClassification')),

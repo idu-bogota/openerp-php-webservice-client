@@ -38,7 +38,7 @@ catch(Exception $e) {
 $partner_id = new OpenErpPartner($c);
 $partner_id->attributes = array(
     'name' => 'partner '.$time,
-    'ref' => $time
+    'vat' => $time
 );
 
 try {
@@ -108,7 +108,7 @@ $pqr->attributes = array(
     ),
     'partner_id' => array(
         'name' => 'my organisation '.$time,
-        'ref' => 'nit_'.$time,
+        'vat' => 'nit_'.$time,
     ),
     'geo_point' => $geojson,
     'categ_id' => array('name' => 'Valor reclamaciones'),
