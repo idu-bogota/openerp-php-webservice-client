@@ -16,6 +16,7 @@ class OpenErpWebServiceClient {
 
     protected function login() {
         $client = new Zend_XmlRpc_Client($this->openerp_server.'/common');
+        $client->setSkipSystemLookup(true);
         $this->user_id = $client->call('login', array($this->dbname, $this->username, $this->pwd));
         return $this->user_id;
     }
@@ -26,6 +27,7 @@ class OpenErpWebServiceClient {
         }
         if(empty($this->client)) {
             $this->client = new Zend_XmlRpc_Client($this->openerp_server.'/object');
+            $this->client->setSkipSystemLookup(true);
         }
         $auth = array($this->dbname, $this->user_id, $this->pwd);
         $extra = array($model, $operation, $parameters);
@@ -80,6 +82,10 @@ abstract class OpenErpObject {
     }
 
     public function loadOne($id) {
+        if(is_array($id))
+        {
+          $id = $id[0];
+        }
         return $this->load((int)$id, TRUE);
     }
 
